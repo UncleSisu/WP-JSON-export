@@ -14,8 +14,16 @@ if (false === $isDefaultSite) {
         }
     }
 }
+
 ?>
-<?php if (is_array($sites)): ?>
+    <div id="update-env">
+        <label for="currentEnvironment">Select Environment</label>
+        <select id="currentEnvironment" value="<?php echo Post_Jsoner_Admin::getActiveSiteEnvironment(); ?>">
+            <option value="QA" <?php echo (Post_Jsoner_Admin::getActiveSiteEnvironment()=="QA") ? 'selected="selected"' : '';?>>QA</option>
+            <option value="UAT" <?php echo (Post_Jsoner_Admin::getActiveSiteEnvironment()=="UAT") ? 'selected="selected"' : '';?>>UAT</option>
+            <option value="PROD" <?php echo (Post_Jsoner_Admin::getActiveSiteEnvironment()=="PROD") ? 'selected="selected"' : '';?>>PROD</option>
+        </select>
+    </div>
     <section id="export-site">
         <p>
             <em>
@@ -23,6 +31,7 @@ if (false === $isDefaultSite) {
             </em>
         </p>
         <form id="jsoner-site-export-form">
+<?php if (is_array($sites)): ?>
             <label for="site">Select Site:</label>
             <?php if ($isDefaultSite): ?>
             <input type="text" id="site" list="sites">

@@ -186,6 +186,26 @@ jQuery(document).ready(function ($) {
             })
         ;
     });
+
+    $(document).on('change','#currentEnvironment', function (event) {
+        event.preventDefault();
+        const value = event.target.value;
+        $.ajax({
+            url: ajaxurl,
+            type: 'POST',
+            async: true,
+            data: {
+                action: 'jsoner_update_env',
+                page: 'post_jsoner',
+                new_env: value
+            },
+            dataType: 'json',
+        }).done(function (response) {
+           console.log("jsoner_update_env success:",response);
+        }).fail(function (response) {
+            console.log("jsoner_update_env failure:",response);
+        });
+    });
 });
 
 function generateToast({

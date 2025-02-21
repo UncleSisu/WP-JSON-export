@@ -19,10 +19,10 @@ if (!defined('ABSPATH'))
     die('ERROR: This plugin requires WordPress and will not function if called directly.');
 }
 
-if (!is_admin())
-{
-    return false;
-}
+//if (!is_admin())
+//{
+//    return false;
+//}
 
 define('PLUGIN_DIR', dirname(__FILE__));
 foreach (glob(dirname(__FILE__) . '/autoload/*.php') as $file)
@@ -35,7 +35,7 @@ foreach (glob(dirname(__FILE__) . '/autoload/*.php') as $file)
 
 if (!defined('DEBUG_FILE'))
 {
-    define('DEBUG_FILE', '/var/log/wp-error.log');
+    define('DEBUG_FILE', '/tmp/wp-error.log');
 }
 
 use Posts_Jsoner\admin\Administrator;

@@ -122,6 +122,31 @@ class Administrator
         add_action('wp_ajax_jsoner_site', function () {
             return $this->jsonerSiteExport();
         });
+        add_action('wp_ajax_jsoner_update_env', function () {
+            return $this->jsonerUpdateEnv();
+        });
+    }
+
+    public function jsonerUpdateEnv(): void
+    {
+        $validEnvs = ['QA', 'UAT', 'PROD'];
+        $newEnv = $_POST['new_env'];
+        $response = [
+            'errors' => null,
+            'success' => false,
+        ];
+        error_log("jsonerUpdateEnv:newEnv: ".var_export($newEnv,1),3, DEBUG_FILE);
+        if (in_array($newEnv, $validEnvs)) {
+            $out = \Post_Jsoner_Admin::setActiveSiteEnvironment($newEnv);
+            error_log("jsonerUpdateEnv:update: ".var_export($out,1),3, DEBUG_FILE);
+            $response['success'] = true;
+
+            $this->responseSuccess($response);
+        } else {
+            $response['success'] = false;
+
+            $this->responseSuccess($response);
+        }
     }
 
     /**
