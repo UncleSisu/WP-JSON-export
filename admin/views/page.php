@@ -10,7 +10,7 @@ $tab = get_current_blog_id() !== 1 ? $default_tab : $_GET['tab'] ?? $default_tab
     <h1>Posts JSONer - Administration page</h1>
     <main class="jsoner">
         <nav class="nav-tab-wrapper">
-            <?php if (get_current_blog_id() === 1) { ?>
+            <?php if ((get_current_blog_id() === 1) && is_admin()) { ?>
                 <a href="?page=post-jsoner&tab=settings" class="nav-tab <?php echo ($tab == 'settings') ? 'nav-tab-active' : ''; ?>">Settings</a>
             <?php }
  ?>
